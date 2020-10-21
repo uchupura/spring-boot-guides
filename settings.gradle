@@ -1,4 +1,5 @@
 rootProject.name = 'spring-boot-guides'
 
 include 'spring-boot-oauth2'
+include 'spring-boot-redis'
 
