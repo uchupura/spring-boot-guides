@@ -1,0 +1,13 @@
+version: "3"
+services:
+  redis:
+    restart: always
+    image: redis:5.0
+    container_name: redis-server
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./volumes/redis:/data

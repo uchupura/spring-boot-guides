@@ -1,0 +1,4 @@
+# Project exclude paths
+/.gradle/
+/spring-boot-oauth2/build/
+/spring-boot-oauth2/build/classes/java/main/

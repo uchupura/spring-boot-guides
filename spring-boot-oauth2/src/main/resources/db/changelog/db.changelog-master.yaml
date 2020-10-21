@@ -1,0 +1,299 @@
+databaseChangeLog:
+- changeSet:
+      id: oauth2 jdbc token store
+      author: sebastian
+      changes:
+      - createTable:
+            tableName: oauth_access_token
+            columns:
+            - column:
+                  name: authentication_id
+                  type: varchar(256)
+                  constraints:
+                      primaryKey: true
+                      nullable: false
+            - column:
+                  name: token_id
+                  type: varchar(256)
+            - column:
+                  name: token
+                  type: bytea
+            - column:
+                  name: user_name
+                  type: varchar(256)
+            - column:
+                  name: client_id
+                  type: varchar(256)
+            - column:
+                  name: authentication
+                  type: bytea
+            - column:
+                  name: refresh_token
+                  type: varchar(256)
+      - createTable:
+            tableName: oauth_refresh_token
+            columns:
+            - column:
+                  name: token_id
+                  type: varchar(256)
+            - column:
+                  name: token
+                  type: bytea
+            - column:
+                  name: authentication
+                  type: bytea
+      - createTable:
+          tableName: oauth_client_details
+          columns:
+            - column:
+                name: client_id
+                type: varchar(256)
+                constraints:
+                  primaryKey: true
+            - column:
+                name: resource_ids
+                type: varchar(256)
+            - column:
+                name: client_secret
+                type: varchar(256)
+            - column:
+                name: scope
+                type: varchar(256)
+            - column:
+                name: authorized_grant_types
+                type: varchar(256)
+            - column:
+                name: web_server_redirect_uri
+                type: varchar(256)
+            - column:
+                name: authorities
+                type: varchar(256)
+            - column:
+                name: access_token_validity
+                type: integer
+            - column:
+                name: refresh_token_validity
+                type: integer
+            - column:
+                name: additional_information
+                type: varchar(4096)
+            - column:
+                name: autoapprove
+                type: varchar(256)
+- changeSet:
+    id: users store
+    author: sebastian
+    changes:
+      - createTable:
+          tableName: member
+          columns:
+            - column:
+                name: id
+                type: bigint(20)
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: name
+                type: varchar(256)
+            - column:
+                name: password
+                type: varchar(256)
+            - column:
+                name: phone
+                type: varchar(256)
+            - column:
+                name: created_date
+                type: timestamp
+            - column:
+                name: last_modified_date
+                type: timestamp
+      - createTable:
+          tableName: user
+          columns:
+            - column:
+                name: id
+                type: bigint(20)
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: login_id
+                type: varchar(256)
+            - column:
+                name: password
+                type: varchar(256)
+            - column:
+                name: name
+                type: varchar(256)
+            - column:
+                name: phone
+                type: varchar(256)
+            - column:
+                name: email
+                type: varchar(256)
+            - column:
+                name: role
+                type: varchar(256)
+            - column:
+                name: created_by
+                type: bigint(20)
+            - column:
+                name: last_modified_by
+                type: bigint(20)
+            - column:
+                name: created_date
+                type: timestamp
+            - column:
+                name: last_modified_date
+                type: timestamp
+
+# just for testing, it's not a good practice
+- changeSet:
+      id: insert default users
+      author: sebastian
+      changes:
+      - insert:
+            tableName: member
+            columns:
+            - column:
+                    name: name
+                    value: "admin1@pm.com"
+            - column:
+                    name: password
+                    value: "{bcrypt}$2a$10$C8YkyybId60aTmrbOxjFJu3YHYdA3GAkyqRpJUF23SSrrcV7thynG"
+            - column:
+                    name: phone
+                    value: "ROLE_ADMIN"
+            - column:
+                    name: created_date
+                    value: "now()"
+            - column:
+                    name: last_modified_date
+                    value: "now()"
+
+      - insert:
+            tableName: member
+            columns:
+            - column:
+                    name: name
+                    value: "user1@pm.com"
+            - column:
+                    name: password
+                    value: "{bcrypt}$2a$10$C8YkyybId60aTmrbOxjFJu3YHYdA3GAkyqRpJUF23SSrrcV7thynG"
+            - column:
+                    name: phone
+                    value: "ROLE_USER"
+            - column:
+                    name: created_date
+                    value: "now()"
+            - column:
+                    name: last_modified_date
+                    value: "now()"
+
+      - insert:
+          tableName: user
+          columns:
+            - column:
+                name: login_id
+                value: "admin"
+            - column:
+                name: password
+                value: "{bcrypt}$2a$10$FxPmYP.nyv119bFa8PNlmOSkK6wb8m3a6ru42oewaZ4HZsamleFW6"
+            - column:
+                name: name
+                value: "관리자"
+            - column:
+                name: phone
+                value: "01011111111"
+            - column:
+                name: email
+                value: "admin@pm.com"
+            - column:
+                name: role
+                value: "ADMIN"
+            - column:
+                name: created_by
+                value: "1"
+            - column:
+                name: last_modified_by
+                value: "1"
+            - column:
+                name: created_date
+                value: "now()"
+            - column:
+                name: last_modified_date
+                value: "now()"
+
+      - insert:
+          tableName: user
+          columns:
+            - column:
+                name: login_id
+                value: "user"
+            - column:
+                name: password
+                value: "{bcrypt}$2a$10$JgyX8yzmhWCX0YTJJdRR5eX1b8ZsZE40pzE00gLyhcejosjY0ML6y"
+            - column:
+                name: name
+                value: "유저"
+            - column:
+                name: phone
+                value: "01022222222"
+            - column:
+                name: email
+                value: "user@pm.com"
+            - column:
+                name: role
+                value: "USER"
+            - column:
+                name: created_by
+                value: "1"
+            - column:
+                name: last_modified_by
+                value: "1"
+            - column:
+                name: created_date
+                value: "now()"
+            - column:
+                name: last_modified_date
+                value: "now()"
+
+      - insert:
+          tableName: oauth_client_details
+          columns:
+            - column:
+                name: client_id
+                value: "my-client1"
+            - column:
+                name: client_secret
+                value: "{noop}my-secret1"
+            - column:
+                name: resource_ids
+                value: null
+            - column:
+                name: scope
+                value: "read,write,trust"
+            - column:
+                name: authorized_grant_types
+                value: "password,authorization_code,refresh_token"
+            - column:
+                name: web_server_redirect_uri
+                value: null
+            - column:
+                name: authorities
+                value: "ROLE_CLIENT"
+            - column:
+                name: access_token_validity
+                value: 600
+            - column:
+                name: refresh_token_validity
+                value: 6000
+            - column:
+                name: additional_information
+                value: null
+            - column:
+                name: autoapprove
+                value: null
