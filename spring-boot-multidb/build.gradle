@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+
+    // mysql connector
+    runtime 'mysql:mysql-connector-java'
+
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+}

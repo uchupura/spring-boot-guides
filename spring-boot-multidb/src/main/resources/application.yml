@@ -1,0 +1,41 @@
+spring:
+  profiles: default
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate.hbm2ddl.auto: create
+      # charset
+      hibernate.connection.CharSet: utf8
+      hibernate.connection.characterEncoding: utf8
+      hibernate.connection.useUnicode: true
+      # Logging
+      hibernate.show_sql: true                           # console에 JPA를 통해 실행된 쿼리 출력
+      hibernate.format_sql: true                          # console에 출력되는 쿼리를 가독성 있게 표시
+      hibernate.use_sql_comments: false                   # console에 JPQL 표시
+      # other
+      hibernate.temp.use_jdbc_metadata_defaults: false    # 메타 정보 검색 사용 유무 설정
+      hibernate.jdbc.time_zone: Asia/Seoul
+      hibernate.default_batch_fetch_size: 100
+  datasource:
+    user:
+      resource-name: user
+      driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+      jdbc-url: jdbc:mysql://localhost:3306/user?zeroDateTimeBehavior=convertToNull&useEncoding=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Seoul
+      username: admin
+      password: password
+      validation-query: SELECT 1
+      logAbandoned: true
+      minimum-idle: 10
+      maximum-pool-size: 20
+      package-to-scan: com.guide.multidb.entity.user.**
+    company:
+      resource-name: company
+      driver-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+      jdbc-url: jdbc:mysql://localhost:3307/company?zeroDateTimeBehavior=convertToNull&useEncoding=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Seoul
+      username: admin
+      password: password
+      validation-query: SELECT 1
+      logAbandoned: true
+      minimum-idle: 10
+      maximum-pool-size: 20
+      package-to-scan: com.guide.multidb.entity.company.**
