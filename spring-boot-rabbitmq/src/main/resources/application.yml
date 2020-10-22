@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: stage
+  rabbitmq:
+    host: 172.21.115.16,172.21.112.205
+    port: 5672
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s                # 첫번째와 두번째 시도의 간격
+          max-attempts: 3                     # 예외 발생 시 재시도 횟수
+          max-interval: 3s                    # 재시도 간 최대 간격
+          multiplier: 1                       # 재시도 간격에 곱하여 적용
+        concurrency: 5                        # 리스너 동시 처리 개수
+        max-concurrency: 10                   # 리스너 최대 동시 처리 개수
+        default-requeue-rejected: false       # listener에서 예외 발생 시 다시 큐에 넣을지 유무, true일 경우 다시 큐에 넣음 (default: false)
+    queues: chat,notification
