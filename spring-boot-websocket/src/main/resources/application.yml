@@ -1,0 +1,4 @@
+spring:
+  profiles: default
+  rabbitmq:
+    host: 172.21.115.16

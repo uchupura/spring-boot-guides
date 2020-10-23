@@ -5,4 +5,5 @@ include 'spring-boot-redis'
 include 'spring-boot-rabbitmq'
 include 'spring-boot-multidb'
 include 'spring-boot-log'
+include 'spring-boot-websocket'
 
