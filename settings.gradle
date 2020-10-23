@@ -4,4 +4,5 @@ include 'spring-boot-oauth2'
 include 'spring-boot-redis'
 include 'spring-boot-rabbitmq'
 include 'spring-boot-multidb'
+include 'spring-boot-log'
 
