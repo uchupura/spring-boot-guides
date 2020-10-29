@@ -11,7 +11,7 @@ spring.batch.job.names: ${job.name:NONE}
 ```
 * 운영 환경에서는 아래와 같이 실행
 ```shell script
-$ java -jar batch-application.jar --job.name=simpleJob
+$ java -jar -Dspring.profiles.active=stage spring-boot-batch.jar --job.name=CustomDbChunkWriterJob version=4 status=JOIN
 ```
 
 ### BatchStatus vs ExitStatus
@@ -154,3 +154,27 @@ public JpaPagingItemReader<Person> reader() {
         
         
         
+## Jenkins
+* Build
+    * [Add build step] 버튼을 클릭
+    * [Invoke Gradle script] 선택
+    * [Use Gradle Wrapper] 선택
+    * [Make gradlew executable] 체크
+    * Wrapper location : ./
+    * Tasks
+    ```shell script
+    :application:clean
+    :application:spring-boot-batch:build
+    -Dspring.profiles.active=stage
+    ``` 
+### Publish over SSH
+* Jenkins 관리 - 시스템 설정 - Publish over SSH
+    * Passphrase : 접속하려는 서버의 패스워드
+    * SSH Servers.Name : 서버 이름 (임의 지정 가능)
+    * SSH Servers.Hostname : 접속하려는 서버 IP
+    * SSH Servers.Username : 접속하려는 서버의 로그인 아이디
+* 프로젝트 - 구성 - Build - Send files or execute commands over SSH 
+    * Name : 시스템 관리에서 생성 한 서버 중에서 선택
+    * Source files : 전달하려는 파일 정보
+    * Remove prefix : 전달 후 삭제하려는 폴더
+    * Remote directory : 대상 서버에서 복사 대상이 되는 폴더
