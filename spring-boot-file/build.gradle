@@ -18,6 +18,11 @@ dependencies {
 
     implementation 'commons-io:commons-io:2.8.0'
 
+    implementation 'org.apache.poi:poi-ooxml:4.1.2' // .xlsx
+    implementation 'org.apache.poi:poi:4.1.2'       // .xls
+
+    implementation 'eu.bitwalker:UserAgentUtils:1.21'
+
     implementation 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
