@@ -32,7 +32,7 @@ appender("CONSOLE", ConsoleAppender) {
 
 appender("SERVER", RollingFileAppender) {
     Thread.sleep 300;
-    file = "../logs/server.log"
+    file = "./logs/server.log"
     append = true
     encoder(PatternLayoutEncoder) {
         pattern = "%d ${hostName} |-${profile} [%thread] %5p %50.50c{50}:%4L - %.-16200m%n"
@@ -48,7 +48,7 @@ appender("SERVER", RollingFileAppender) {
 
 appender("ERROR", RollingFileAppender) {
     Thread.sleep 300;
-    file = "../logs/error.log"
+    file = "./logs/error.log"
     append = true
     encoder(PatternLayoutEncoder) {
         pattern = "%d ${hostName} |-${profile} [%thread] %5p %50.50c{50}:%4L - %.-16200m%n"
