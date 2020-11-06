@@ -1,0 +1,22 @@
+[[hello]]
+=== Hello
+
+Resource에 대한 설명 추가
+
+==== /hello [small silver]*[GET]*
+`GET` 요청은 hello world를 리턴합니다.
+
+include::{snippets}/Home/greeting/http-request.adoc[]
+
+===== Request Structure
+====== request-body
+include::{snippets}/Home/greeting/request-body.adoc[]
+
+
+===== Response Structure
+====== response-fields
+include::{snippets}/Home/greeting/response-fields.adoc[]
+
+
+===== Example Response
+include::{snippets}/Home/greeting/http-response.adoc[]

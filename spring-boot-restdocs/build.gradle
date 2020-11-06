@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'org.asciidoctor.convert' version '1.5.6'
+    id 'org.kordamp.gradle.livereload' version '0.4.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    implementation 'org.modelmapper:modelmapper:2.3.1'
+
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+asciidoctor {
+    logger.quiet "#######  asciidoctor #######"
+    sourceDir 'src/main/asciidoc'
+    attributes 'snippets': snippetsDir
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+liveReload {
+    docRoot asciidoctor.outputDir.canonicalPath
+    dependsOn asciidoctor
+}
+
+test {
+    useJUnitPlatform()
+}

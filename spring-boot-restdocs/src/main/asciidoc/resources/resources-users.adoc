@@ -1,0 +1,18 @@
+[[User]]
+=== User
+
+Resource에 대한 설명 추가
+
+==== /users [small silver]*[POST]*
+`POST` 요청은 User 리스트를 생성합니다.
+
+include::{snippets}/User/test01_create-user/http-request.adoc[]
+
+===== Request Structure
+include::{snippets}/User/test01_create-user/request-fields.adoc[]
+
+===== Response Structure
+include::{snippets}/User/test01_create-user/response-fields.adoc[]
+
+===== Example Response
+include::{snippets}/User/test01_create-user/http-response.adoc[]
