@@ -1,5 +1,9 @@
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.core.spi.FilterReply
+
+import static ch.qos.logback.classic.Level.ERROR
+import static ch.qos.logback.classic.Level.WARN
 
 System.setProperty("java.net.preferIPv4Stack","true")
 
@@ -10,7 +14,7 @@ def profile = System.getProperty("spring.profiles.active","default").toUpperCase
 def hostName = hostname
 
 def logMaxHistory = 5
-def logLevel = Level.INFO
+def logLevel = Level.DEBUG
 if ("PRD".equals(profile)) {
     localMaxHistory = 30
     logLevel = Level.INFO
@@ -44,6 +48,10 @@ appender("SERVER", RollingFileAppender) {
             maxFileSize = "1gb"
         }
     }
+    // 특정 레벨만 로깅
+    filter(com.guide.log.config.CustomFilter) {
+        levelList = [DEBUG, INFO]
+    }
 }
 
 appender("ERROR", RollingFileAppender) {
@@ -61,13 +69,17 @@ appender("ERROR", RollingFileAppender) {
         }
     }
     // 특정 레벨 이상만 로깅
-    filter(ch.qos.logback.classic.filter.ThresholdFilter) {
+    /*filter(ch.qos.logback.classic.filter.ThresholdFilter) {
         level = WARN // INFO 이상 레벨만 로깅
+    }*/
+    // 특정 레벨만 로깅
+    filter(com.guide.log.config.CustomFilter) {
+        levelList = [WARN, ERROR]
     }
 }
 
-logger("org.springframework", Level.ERROR)
-logger("com.guide.log", Level.INFO)
+logger("org.springframework", ERROR)
+logger("com.guide.log", Level.DEBUG)
 //
 //
 //logger("ch.qos.logback.classic.gaffer.ConfigurationDelegate", Level.ERROR, ["CONSOLE"], false)
@@ -91,7 +103,7 @@ logger("com.guide.log", Level.INFO)
 //logger("org.hsqldb.jdbcDriver", Level.ERROR)
 
 if ("PRD".equals(profile)) {
-    root(logLevel, ["SERVER"])
+    root(logLevel, ["SERVER","ERROR"])
 } else {
     root(logLevel, ["CONSOLE","SERVER","ERROR"])
 }
