@@ -4,6 +4,7 @@ import com.guide.event.domain.member.Member;
 import com.guide.event.global.config.event.PublishEvent;
 import com.guide.event.global.config.event.Event;
 import lombok.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "orders")
 @Entity
 @NoArgsConstructor
-public class Order {
+public class Order extends AbstractAggregateRoot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,15 +36,7 @@ public class Order {
         this.price = price;
         this.count = count;
         this.totalPrice = totalPrice;
-    }
 
-    @PostPersist
-    public void postPersist() {
-        OrderCreatedEvent event = OrderCreatedEvent.builder()
-                .orderId(id)
-                .memberName(member.getName())
-                .totalPrice(totalPrice)
-                .build();
-        Event.publish(event);
+        registerEvent(new OrderCreatedEvent(this));
     }
 }

@@ -154,4 +154,20 @@ execution([수식어] 리턴타입 [클래스이름].이름(파라미터)
     
 
 ---
-# AssertThat
+# 이벤트 처리
+## 도메인 이벤트
+* AbstractAggregateRoot를 사용하여 도메인 이벤트를 발생 시키는 경우 @EventListener와 @TransactionalEventListener의 동작은 어플리케이션 이벤트와 다르게 동작한다.
+* @EventListener
+    * save() 함수가 호출 될 때 이벤트 리스너가 이벤트를 수신한다.
+    * 리스너에서 예외 발생 시 이벤트를 호출 한 도메인의 트랜잭션은 롤백된다.
+* @TransactionalEventListener
+    * Transaction이 종료되는 시점에 이벤트 리스너가 이벤트를 수신한다.
+    * 리스너에서 예외 발생 시 이벤트를 호출 한 도메인의 트랜잭션은 롤백되지 않는다.
+
+## 어플리케이션 이벤트
+* @EventListener
+    * 동기 방식으로 이벤트 리스너가 이벤트를 수신한다.
+* @TransactionalEventListener
+    * Transaction이 종료되는 시점에 이벤트 리스너가 이벤트를 수신한다.
+
+ 

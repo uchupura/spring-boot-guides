@@ -18,7 +18,7 @@ public class EventPublisherAspect implements ApplicationEventPublisherAware {
         this.publisher = eventPublisher;
     }
 
-    @Around("@annotation(org.springframework.transaction.annotation.Transactional) || @annotation(com.guide.event.global.config.event.PublishEvent)")
+    @Around("@annotation(com.guide.event.global.config.event.PublishEvent)")
     public Object handleEvent(ProceedingJoinPoint joinPoint) throws Throwable {
         boolean nested;
         Boolean appliedValue = threadLocal.get();
