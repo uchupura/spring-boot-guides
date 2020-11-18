@@ -50,31 +50,108 @@
 
 ---
 
-## Statement Cache
+# Statement Cache
 * 많은 커넥션 풀 라이브러리들은 PreparedStatement 캐시를 지원하지만 HikariCP는 지원하지 HikariCP는 지원하지 않음
 * 커넥션 풀 레이어에서 PreparedStatement는 각 커넥션마다 캐싱됨
     * ex) 어플리케이션에서 250개의 공통적인 쿼리를 캐싱하고 있고 pool size가 20이라면 5000개의 쿼리 실행 계획이 캐싱됨 
     
-### cachePrepStmts
+## cachePrepStmts
 * 캐시가 기본적으로 비활성화되어 있는 경우 위 매개 변수 중 어느 것도 영향을 받지 않음
 
-### prepStmtCacheSize
+## prepStmtCacheSize
 * 각각의 커넥션마다 드라이버가 캐싱 할 PreparedStatement 개수 설정 (default:25)
 
-### prepStmtCacheSqlLimit
+## prepStmtCacheSqlLimit
 * 드라이버가 캐싱 할 수 있는 최대 PreparedStatement 개수 설정 (default:256)
 
-### useServerPrepStmts
+## useServerPrepStmts
 * MySQL 최신 버젼에서 server-side PreparedStatement 지원
 
 ---
-## SpEL
-### SpEL이란?
+# SpEL
+## SpEL이란?
 Spring Expression Language의 약자로 런타임시에 객체 그래프를 조회하고 조작하는 강력한 표현 언어
 메서드 호출, 프로퍼티 접근, 생성자 호출 같은 넓은 범위의 기능을 지원
 
-### ExpressionParser 인터페이스
+## ExpressionParser 인터페이스
 * 문자열 표현을 파싱하는 역활
 
-### Expression 인터페이스
+## Expression 인터페이스
 * ExpressionParser에서 정의한 문자열 표현을 평가하는 역활
+
+
+---
+# EventListener
+## @EventListener
+* Synchronous(동기)로 처리된다.
+* Transaction이 EventListener에도 같이 묶여서 처리된다.
+## @TransactionalEventListener
+* Asynchronous(비동기)로 처리된다.
+* Transaction이 EventListener와 별도로 불리되기 때문에 EventListener에서 Exception이 발생해도 기존 서비스의 Transaction에 영향을 미치지 않는다.
+* phase 종류
+    * BEFORE_COMMIT
+    * AFTER_COMPLETION
+    * AFTER_COMMIT
+    * AFTER_ROLLBACK
+    
+
+---
+# 도메인형 디렉토리 구조
+* Root Package
+    * Application 클래스
+    * domain 패키지 : 도메인을 담당하는 패키지
+        * coupon : Coupon, CouponDTO, CouponAPI, CouponService, CouponRepository, xxxException
+        * member : Member, MemberDTO, MemberAPI, MemberService, MemberRepository, xxxException
+        * model : Domain Entity 객체들이 공통적으로 사용하는 클래스들로 구성 ex) Embeddable, Enum
+    * global 패키지 : 프로젝트 전방위적으로 사용되는 패키지
+        * common : 공통으로 사용되는 Value 객체 ex) 페이징 처리 Request 클래스, 공통 응답을 주는 Reponse 클래스
+        * config : 스프링 각종 설정
+        * error : 각종 예외 처리 클래스
+        * util : 유틸성 클래스
+    * infra 패키지 : 외부 서비스 연동을 위한 패키지
+        
+---
+# Spring AOP PointCut 표현식
+## PointCut 명시자
+### execution : Advice를 적용할 메서드를 명시 할 때 사용
+```
+execution([수식어] 리턴타입 [클래스이름].이름(파라미터)
+
+# 수식어 : public, private 등 수식어를 명시합니다. (생략 가능)
+# 리턴타입 : 리턴 타입을 명시합니다.
+# 클래스이름 및 이름 : 클래스이름과 메서드 이름을 명시합니다. (클래스 이름은 풀 패키지명으로 명시해야합니다. 생략도 가능)
+# 파라미터 : 메서드의 파라미터를 명시합니다.
+# " * " : 모든 값을 표현합니다.
+# " .. " : 0개 이상을 의미합니다.
+```
+* execution(public Integer com.edu.aop.*.*(*))
+    * com.edu.aop 패키지에 속해있고, 파라미터가 1개인 모든 메서드
+* execution(* com.edu..*.get*(..))
+    * com.edu 패키지 및 하위 패키지에 속해있고, 이름이 get으로 시작하는 파라미터가 0개 이상인 모든 메서드 
+* execution(* com.edu.aop..*Service.*(..))
+    * com.edu.aop 패키지 및 하위 패키지에 속해있고, 이름이 Service르 끝나는 인터페이스의 파라미터가 0개 이상인 모든 메서드
+* execution(* com.edu.aop.BoardService.*(..))
+    * com.edu.aop.BoardService 인터페이스에 속한 파마리터가 0개 이상인 모든 메서드
+* execution(* some*(*, *))
+    * 메서드 이름이 some으로 시작하고 파라미터가 2개인 모든 메서드 
+
+### within : 특정 타입에 속하는 메서드를 JoinPoint로 설정되도록 명시 할 때 사용  
+* within(com.edu.aop.SomeService)
+    * com.edu.aop.SomeService 인터페이스의 모든 메서드
+* within(com.edu.aop.*)
+    * com.edu.aop 패키지의 모든 메서드
+* within(com.edu.aop..*)
+    * com.edu.aop 패키지 및 하위 패키지의 모든 메서드
+* within(com..*)
+    * com 패키지 및 하위 패키지의 모든 메서드
+* within(org.springframework.validation..*)
+ 
+### bean : 스프링 버전 2.5 버전부터 지원하기 시작했으며, 스프링 빈을 이용하여 JoinPoint를 설정
+* bean(someBean)
+    * 이름이 someBean인 빈의 모든 메서드
+* bean(some*)
+    * 빈의 이름이 some으로 시작하는 빈의 모든 메서드
+    
+
+---
+# AssertThat
