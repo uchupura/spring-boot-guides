@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/livecm?serverTimezone=UTC
+      username: admin
+      password: password
+      driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        default_batch_fetch_size: 3
+
+  h2:
+    console:
+      enabled: true
+
+logging.level:
+  org.hibernate.SQL: debug    # SQL이 logger로 출력됨
+  org.hibernate.type: trace   # SQL 바인딩 파라미터를 보려고 할 경우
+
