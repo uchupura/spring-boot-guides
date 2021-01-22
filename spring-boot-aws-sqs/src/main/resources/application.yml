@@ -1,8 +1,5 @@
 cloud:
   aws:
-    credentials:
-      access-key: AKIA2RZAXHKXS3D24IVM
-      secret-key: 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
     region:
       static: ap-northeast-2 # AWS SQS의 리전정보
     stack:
