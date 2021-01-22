@@ -1,5 +1,8 @@
 cloud:
   aws:
+    credentials:
+      access-key: xxxx
+      secret-key: xxxx
     region:
       static: ap-northeast-2 # AWS SQS의 리전정보
     stack:
@@ -7,7 +10,8 @@ cloud:
     sqs:
       queue:
         name: MyQueue.fifo
-        url: https://sqs.ap-northeast-2.amazonaws.com/725381233327/MyQueue.fifo # 생성한 SQS 큐 url
+        url: https://sqs.ap-northeast-2.amazonaws.com/xxxxx/MyQueue.fifo # 생성한 SQS 큐 url
+
 logging:
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %-5level --- [%thread] %logger{35} : %msg %n'
