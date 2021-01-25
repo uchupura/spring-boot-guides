@@ -12,4 +12,6 @@ include 'spring-boot-file'
 include 'spring-boot-restdocs'
 include 'spring-boot-openfeign'
 include 'spring-boot-jpa'
+include 'spring-boot-quartz'
+
 include 'spring-boot-aws-sqs'
