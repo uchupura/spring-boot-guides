@@ -12,6 +12,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Date;
 
 @Slf4j
@@ -26,6 +27,12 @@ public class RabbitMQConsumer {
         log.info("Processing at \'{}\' queue \'{}\' payload \'{}\'", new Date(), message.getMessageProperties().getConsumerQueue().toString(), notification.toString());
         if (notification.isHasError()) {
             throw new NullPointerException("test");
+        }
+        try {
+            channel.basicAck(tag, false);
+            //channel.basicNack(tag, false, true);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

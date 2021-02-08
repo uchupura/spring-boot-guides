@@ -34,16 +34,18 @@ public class RabbitMQConfiguration {
             DirectExchange exchange = createExchange(routingKey);
             addExchange(exchange);
 
-            Queue queue = QueueBuilder.durable(QueueName(routingKey))
+            /*Queue queue = QueueBuilder.durable(QueueName(routingKey))
                     .withArgument("x-dead-letter-exchange", "")
                     .withArgument("x-dead-letter-routing-key", DeadLetterQueueName(routingKey))
+                    .build();*/
+            Queue queue = QueueBuilder.durable(QueueName(routingKey))
                     .build();
             addQueue(queue);
 
             addBinding(queue, exchange, routingKey);
 
-            Queue dlq = QueueBuilder.durable(DeadLetterQueueName(routingKey)).build();
-            addQueue(dlq);
+            /*Queue dlq = QueueBuilder.durable(DeadLetterQueueName(routingKey)).build();
+            addQueue(dlq);*/
         });
     }
 
