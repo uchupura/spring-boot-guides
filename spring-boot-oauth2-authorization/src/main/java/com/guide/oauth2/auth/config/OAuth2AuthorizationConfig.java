@@ -12,15 +12,18 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableAuthorizationServer
-public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     private static final String AUTHORIZATION_CODE = "authorization_code";
     private static final String REFRESH_TOKEN = "refresh_token";
 
@@ -29,6 +32,8 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private final DataSource datasource;
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailService userDetailService;
+
+    private final CustomTokenEnhancer tokenEnhancer;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -66,7 +71,12 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         super.configure(endpoints);
-        endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailService);
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer, (TokenEnhancer)jwtAccessTokenConverter()));
+        endpoints
+                .tokenEnhancer(tokenEnhancerChain)
+                .accessTokenConverter(jwtAccessTokenConverter())
+                .userDetailsService(userDetailService);
     }
 
     @Bean
