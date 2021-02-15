@@ -1,0 +1,22 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: password
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        default_batch_fetch_size: 2
+
+logging.level:
+  org.hibernate.SQL: debug    # SQL이 logger로 출력됨
+  org.hibernate.type: trace   # SQL 바인딩 파라미터를 보려고 할 경우
