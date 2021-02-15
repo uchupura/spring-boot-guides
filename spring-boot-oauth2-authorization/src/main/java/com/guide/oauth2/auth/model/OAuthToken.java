@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class OauthToken {
+public class OAuthToken {
     private String access_token;
     private String token_type;
     private String refresh_token;

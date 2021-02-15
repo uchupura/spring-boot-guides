@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=UTC
@@ -19,8 +19,14 @@ spring:
 
 security:
   oauth2:
+    client:
+      client-id: testClientId
+      client-secret: testSecret
+    resource:
+      token-info-uri: http://localhost:8081/oauth/check_token
     jwt:
       sign-key: 123@#$
+
 
 logging.level:
   org.hibernate.SQL: debug    # SQL이 logger로 출력됨
