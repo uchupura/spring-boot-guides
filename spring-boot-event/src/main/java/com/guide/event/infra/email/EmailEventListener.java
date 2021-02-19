@@ -14,7 +14,7 @@ public class EmailEventListener {
 
     private final EmailService emailService;
 
-    //@Async
+    @Async
     @TransactionalEventListener
     public void handle1(OrderCreatedEvent event) {
         System.out.println( "trn" + event.getOrder().getId());
