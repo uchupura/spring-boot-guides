@@ -1,9 +1,8 @@
-package com.guide.oauth2.resource.model;
+package com.guide.oauth2.password.auth.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +17,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class User extends AbstractAggregateRoot implements UserDetails{
+public class User implements UserDetails {
     public User(String uid, String password, String name, Role role) {
         this.uid = uid;
         this.password = password;
         this.name = name;
         this.role = role;
-        registerEvent(new UserCreatedEvent(this));
     }
 
     @Id
@@ -67,10 +65,5 @@ public class User extends AbstractAggregateRoot implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void changePassword(String password) {
-        this.password = password;
-        registerEvent(new UserPasswordChangedEvent(this));
     }
 }
