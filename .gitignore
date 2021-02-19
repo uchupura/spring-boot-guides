@@ -1,4 +1,20 @@
 # Project exclude paths
+/.idea/
 /.gradle/
+/spring-boot-aws-sqs/build/
+/spring-boot-batch/build/
+/spring-boot-event/build/
+/spring-boot-file/build/
+/spring-boot-jpa/build/
+/spring-boot-log/build/
+/spring-boot-multidb/build/
 /spring-boot-oauth2/build/
-/spring-boot-oauth2/build/classes/java/main/
+/spring-boot-oauth2-authorization/build/
+/spring-boot-oauth2-password-authorization/build/
+/spring-boot-oauth2-resource/build/
+/spring-boot-openfeign/build/
+/spring-boot-quartz/build/
+/spring-boot-rabbitmq/build/
+/spring-boot-redis/build/
+/spring-boot-restdocs/build/
+/spring-boot-websocket/build/
