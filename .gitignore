@@ -15,6 +15,7 @@
 /spring-boot-openfeign/build/
 /spring-boot-quartz/build/
 /spring-boot-rabbitmq/build/
+/spring-boot-rabbitmq2/build/
 /spring-boot-redis/build/
 /spring-boot-restdocs/build/
 /spring-boot-websocket/build/
