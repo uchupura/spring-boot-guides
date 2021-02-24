@@ -1,0 +1,15 @@
+version: "3"
+services:
+  rabbit-mq:
+    restart: always
+    image: itzg/rabbitmq-stomp
+    container_name: rabbit-mq
+    ports:
+      - '4369:4369'
+      - '5671:5671'
+      - '5672:5672'
+      - '15672:15672'
+      - '25672:25672'
+      - '61613:61613'
+    volumes:
+      - ./volumes/rabbitmq:/data
