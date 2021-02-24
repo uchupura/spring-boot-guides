@@ -3,8 +3,8 @@ package com.guide.jpa.domain.circle;
 import com.guide.jpa.domain.user.User;
 import com.guide.jpa.domain.user.UserId;
 import com.guide.jpa.domain.user.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class CircleApiService {
     private final CircleRepository circleRepository;
-    private final CircleService circleService;
     private final UserRepository userRepository;
     private final CircleQueryRepository circleQueryRepository;
 

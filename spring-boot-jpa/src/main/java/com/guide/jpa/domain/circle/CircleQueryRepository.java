@@ -15,7 +15,7 @@ public class CircleQueryRepository extends Querydsl4RepositorySupport {
     }
 
     public List<Circle> findAllCircles() {
-
+        System.out.println();
         return select(circle)
                 .from(circle)
                 .join(circle.owner, user).fetchJoin()
