@@ -56,4 +56,16 @@ create table oauth_approvals (
 );
 
 insert into oauth_client_details(client_id, resource_ids,client_secret,scope,authorized_grant_types,web_server_redirect_uri,authorities,access_token_validity,refresh_token_validity,additional_information,autoapprove)
-values('testClientId',null,'{bcrypt}$2a$10$EtFnfZybVe6rC9P9D6GK9eZsS2vIiBoR1utGEz5VQJ69MIz50Uo0C','read,write','authorization_code','http://localhost:8081/oauth2/callback','ROLE_USER',36000,50000,null,null);
+values('testClientId',null,'{bcrypt}$2a$10$EtFnfZybVe6rC9P9D6GK9eZsS2vIiBoR1utGEz5VQJ69MIz50Uo0C','read,write','password','http://localhost:8081/oauth2/callback','ROLE_USER',36000,50000,null,null);
+
+drop table if exists `user`;
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `uid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into user(uid, password, name, role)
+values ('uchupura', '{bcrypt}$2a$10$tszbJWP3UuXlAmf00XtP5u2jfiqy2vTUc14z9EUBViLHBuM6wf652', '우쭈뿌라', 'ROLE_COUNSELOR');
