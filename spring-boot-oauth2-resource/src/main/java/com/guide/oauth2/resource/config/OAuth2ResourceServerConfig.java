@@ -27,6 +27,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     public void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();    // H2 console 접근 차단 해지
         http.authorizeRequests()
+                .antMatchers("/v1/hello").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
