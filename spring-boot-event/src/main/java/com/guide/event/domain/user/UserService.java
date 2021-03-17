@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository repository;
 
-    @PublishEvent
+    @Transactional
     public User createUser(User user) {
-        user.changePassword("jang3827!!!");
-        return user;
-        /*User saveUser = User.builder()
+//        user.changePassword("jang3827!!!");
+//        return user;
+        User saveUser = User.builder()
                 .uid(user.getUid())
                 .password(user.getPassword())
                 .name(user.getName())
                 .role(user.getRole())
                 .build();
-        return repository.save(saveUser);*/
+        return repository.save(saveUser);
     }
 
     @Transactional
