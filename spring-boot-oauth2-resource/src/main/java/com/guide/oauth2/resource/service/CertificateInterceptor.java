@@ -40,14 +40,14 @@ public class CertificateInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        /*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)authentication.getDetails();
         log.info(details.getTokenValue());
         String principal = (String) authentication.getPrincipal();
         Map<String, Object> additionalInfo = getAdditionalInfo(authentication);
         int userId = (int) additionalInfo.get("user_id");
 
-        log.info(">>>>> afterCompletion executed!!!");
+        log.info(">>>>> afterCompletion executed!!!");*/
     }
 
     private Map<String, Object> getAdditionalInfo(Authentication authentication) {

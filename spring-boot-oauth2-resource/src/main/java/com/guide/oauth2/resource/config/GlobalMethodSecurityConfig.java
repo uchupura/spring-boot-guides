@@ -8,10 +8,7 @@ import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.access.vote.AffirmativeBased;
-import org.springframework.security.access.vote.ConsensusBased;
-import org.springframework.security.access.vote.RoleHierarchyVoter;
-import org.springframework.security.access.vote.RoleVoter;
+import org.springframework.security.access.vote.*;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 

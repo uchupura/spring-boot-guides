@@ -5,8 +5,11 @@ import com.guide.oauth2.resource.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -29,5 +32,10 @@ public class UserService {
         User update = getUserByUid(user.getUid());
         update.changePassword(user.getPassword());
         return update;
+    }
+
+    @Secured({"ROLE_MANAGER"})
+    public List<User> findAll() {
+        return repository.findAll();
     }
 }

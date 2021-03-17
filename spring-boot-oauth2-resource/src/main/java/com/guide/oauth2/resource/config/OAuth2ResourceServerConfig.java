@@ -28,9 +28,9 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         http.headers().frameOptions().disable();    // H2 console 접근 차단 해지
         http.authorizeRequests()
                 .antMatchers("/v1/hello").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .anyRequest().authenticated();
+                /*.and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);*/
 
     }
 
