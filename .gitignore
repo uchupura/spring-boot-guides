@@ -1,6 +1,8 @@
 # Project exclude paths
 /.idea/
 /.gradle/
+/spring-boot-common/build/
+/spring-boot-common/out/
 /spring-boot-aws-sqs/build/
 /spring-boot-aws-sqs/out/
 /spring-boot-batch/build/
@@ -9,6 +11,7 @@
 /spring-boot-event/out/
 /spring-boot-file/build/
 /spring-boot-file/out/
+/spring-boot-file/uploadFiles/
 /spring-boot-jpa/build/
 /spring-boot-jpa/out/
 /spring-boot-jpa/docker-compose/volumes/

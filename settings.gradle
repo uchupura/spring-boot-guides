@@ -1,5 +1,6 @@
 rootProject.name = 'spring-boot-guides'
 
+include 'spring-boot-common'
 include 'spring-boot-oauth2'
 include 'spring-boot-oauth2-authorization'
 include 'spring-boot-oauth2-resource'
