@@ -4,6 +4,8 @@ plugins {
     id 'idea'
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
+    id 'org.asciidoctor.convert' version '1.5.6'
+    id 'org.kordamp.gradle.livereload' version '0.4.0'
 }
 
 sourceCompatibility = 1.8
@@ -14,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(":spring-boot-common")
 
     implementation 'commons-io:commons-io:2.8.0'
 
@@ -23,6 +25,21 @@ dependencies {
 
     implementation 'eu.bitwalker:UserAgentUtils:1.21'
 
-    implementation 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    crosstest project(':spring-boot-common').sourceSets.test.output
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+asciidoctor {
+    logger.quiet "#######  asciidoctor #######"
+    sourceDir 'src/main/asciidoc'
+    attributes 'snippets': snippetsDir
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+test {
+    useJUnitPlatform()
 }
