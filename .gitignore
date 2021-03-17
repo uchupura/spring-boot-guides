@@ -6,6 +6,7 @@
 /spring-boot-event/build/
 /spring-boot-file/build/
 /spring-boot-jpa/build/
+/spring-boot-jpa/docker-compose/volumes/
 /spring-boot-log/build/
 /spring-boot-multidb/build/
 /spring-boot-oauth2/build/

@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Rollback(value = false)
 @Transactional
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -31,8 +30,7 @@ public class Customer2RepositoryTest {
     @Autowired
     private CardRepository cardRepository;
 
-    @Test
-    @Order(1)
+    @BeforeAll
     public void 고객등록() {
         Customer2 customer = new Customer2("홍길동");
         Customer2 savedCustomer = customer2Repository.save(customer);
@@ -106,19 +104,21 @@ public class Customer2RepositoryTest {
     @Order(2)
     public void 고객검색() {
         Customer2 customer = customer2Repository.findById(customerId).orElseThrow(() -> new RuntimeException());
-        Customer2DTO customer2DTO = new Customer2DTO(customer);
+        System.out.println(customer.getPhoneNumbers());
+//        Customer2DTO customer2DTO = new Customer2DTO(customer);
     }
 
     @Test
     @Order(3)
     public void 고객리스트검색() {
         List<Customer2> customers = customer2Repository.findAll();
-        List<Customer2DTO> customerDTOS = customers.stream()
+        /*List<Customer2DTO> customerDTOS = customers.stream()
                 .map(customer -> new Customer2DTO(customer))
                 .collect(Collectors.toList());
         customerDTOS.forEach(customer -> {
             System.out.println(customer.toString());
-        });
+        });*/
+        customers.forEach(o -> System.out.println(o.getPhoneNumbers()));
         System.out.println("END!!");
     }
 
