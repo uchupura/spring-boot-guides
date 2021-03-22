@@ -3,11 +3,11 @@ services:
   batch:
     restart: always
     image: mysql:5.7
-    container_name: oauth2
+    container_name: guide
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_DATABASE=oauth2
+      - MYSQL_DATABASE=guide
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=password

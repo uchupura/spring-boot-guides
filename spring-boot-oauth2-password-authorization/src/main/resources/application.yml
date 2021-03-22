@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/guide?serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     username: admin
     password: password
@@ -21,6 +21,9 @@ security:
   oauth2:
     jwt:
       sign-key: 123@#$
+chat:
+  platform:
+    aes-key: GbOUass5ir5rFPrVy0RxPQ==
 
 logging.level:
   org.hibernate.SQL: debug    # SQL이 logger로 출력됨
