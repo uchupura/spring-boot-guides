@@ -1,4 +1,4 @@
-package com.guide.jpa.domain.user;
+package com.guide.jpa.domain.user.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

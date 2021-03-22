@@ -1,4 +1,4 @@
-package com.guide.jpa.domain.user;
+package com.guide.jpa.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -46,7 +46,7 @@ public class UserDTO {
             String name;
 
             // 도메인 객체를 인자로 받음
-            public User(com.guide.jpa.domain.user.User user) {
+            public User(com.guide.jpa.domain.user.entity.User user) {
                 this.id = user.getId().getValue();
                 this.name = user.getName().getValue();
             }
@@ -59,7 +59,7 @@ public class UserDTO {
             String id;
             String name;
 
-            public Update(com.guide.jpa.domain.user.User user) {
+            public Update(com.guide.jpa.domain.user.entity.User user) {
                 this.id = user.getId().getValue();
                 this.name = user.getName().getValue();
             }

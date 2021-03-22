@@ -1,5 +1,6 @@
 package com.guide.jpa.domain.user;
 
+import com.guide.jpa.domain.user.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

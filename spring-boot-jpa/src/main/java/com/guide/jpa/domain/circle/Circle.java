@@ -1,11 +1,9 @@
 package com.guide.jpa.domain.circle;
 
-import com.guide.jpa.domain.user.User;
-import lombok.Builder;
+import com.guide.jpa.domain.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;

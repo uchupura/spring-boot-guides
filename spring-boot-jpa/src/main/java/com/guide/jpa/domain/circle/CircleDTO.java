@@ -1,12 +1,9 @@
 package com.guide.jpa.domain.circle;
 
-import com.guide.jpa.domain.user.UserDTO;
-import com.guide.jpa.domain.user.UserId;
-import lombok.Builder;
+import com.guide.jpa.domain.user.dto.UserDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;

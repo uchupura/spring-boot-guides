@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.guide.jpa.domain.circle.QCircle.circle;
-import static com.guide.jpa.domain.user.QUser.user;
+import static com.guide.jpa.domain.user.entity.QUser.user;
 
 @Repository
 public class CircleQueryRepository extends Querydsl4RepositorySupport {

@@ -1,5 +1,7 @@
 package com.guide.jpa.domain.user;
 
+import com.guide.jpa.domain.user.entity.User;
+import com.guide.jpa.domain.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

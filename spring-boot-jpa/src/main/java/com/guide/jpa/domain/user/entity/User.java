@@ -1,10 +1,8 @@
-package com.guide.jpa.domain.user;
+package com.guide.jpa.domain.user.entity;
 
 import com.guide.jpa.domain.circle.Circle;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.id.GUIDGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;

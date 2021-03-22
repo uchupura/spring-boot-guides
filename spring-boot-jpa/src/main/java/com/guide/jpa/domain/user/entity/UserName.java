@@ -1,16 +1,20 @@
-package com.guide.jpa.domain.user;
+package com.guide.jpa.domain.user.entity;
 
+import com.guide.jpa.domain.user.support.StringCryptoConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 
 @Getter
 @NoArgsConstructor
 @Embeddable
 public class UserName {
+
+    @Convert(converter = StringCryptoConverter.class)
     @Column(name = "name")
     private String value;
 

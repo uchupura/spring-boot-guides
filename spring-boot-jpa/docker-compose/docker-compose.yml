@@ -3,11 +3,11 @@ services:
   batch:
     restart: always
     image: mysql:5.7
-    container_name: jpa
+    container_name: guide
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_DATABASE=jpa
+      - MYSQL_DATABASE=guide
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=password
