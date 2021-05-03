@@ -3,24 +3,19 @@ package com.guide.jpa.계층관계;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Transactional
 @SpringBootTest
 public class CategoryRepositoryTest {
-//    @Autowired
-    private EntityManager em;
-
     @Autowired
-    private EntityManagerFactory emf;
+    private EntityManager em;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -29,10 +24,6 @@ public class CategoryRepositoryTest {
 
     @Test
     public void 카테고리_생성() {
-
-        /*EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
-        et.begin();
         Category category1 = new Category("고객정보", "고객정보", null);
         categoryRepository.save(category1);
 
@@ -57,21 +48,16 @@ public class CategoryRepositoryTest {
         Category category6 = new Category("해지함", "요금조회", category5);
         categoryRepository.save(category6);
 
-        et.commit();
-        em.clear();*/
+        em.flush();
+        em.clear();
 
-        /*List<Category> all = categoryRepository.findByParentIsNull();
-        List<CategoryDTO> collect = all.stream().map(o -> new CategoryDTO(o)).collect(Collectors.toList());
-        System.out.println("Hello World!");
+        List<Category> categories = categoryRepository.findByParentIsNull();
+        List<CategoryDTO> categoryDTOS = categories.stream().map(o -> new CategoryDTO(o)).collect(Collectors.toList());
+        assertEquals(2, categories.size());
+        assertEquals(2, categories.get(0).getChildren().size());
+        assertEquals(1, categoryDTOS.get(0).getChildren().get(0).getChildren().size());
 
-        Category 납부주기 = categoryQueryRepository.findCategory("요금조회");
-        System.out.println("Hello World!");*/
-
-        List<Category> allCategory = categoryQueryRepository.findAllCategory();
-        if (allCategory != null) {
-            List<CategoryDTO> collect = allCategory.stream().map(o -> new CategoryDTO(o)).collect(Collectors.toList());
-            System.out.println("hello world");
-        }
-        System.out.println("Hello World!");
+        Category category = categoryQueryRepository.findCategory("요금조회");
+        assertEquals(2, category.getChildren().size());
     }
 }
