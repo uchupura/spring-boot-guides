@@ -23,6 +23,8 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+
     // querydsl
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
