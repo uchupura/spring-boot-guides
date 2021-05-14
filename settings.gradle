@@ -18,5 +18,7 @@ include 'spring-boot-restdocs'
 include 'spring-boot-openfeign'
 include 'spring-boot-jpa'
 include 'spring-boot-quartz'
+include 'spring-boot-naver-talktalk'
+include 'spring-boot-https'
 
 include 'spring-boot-aws-sqs'

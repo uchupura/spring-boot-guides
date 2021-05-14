@@ -1,0 +1,10 @@
+server:
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-password: jang3827!
+    key-store-type: JKS
+    key-alias: bns-ssl
+  port: 8443
+
+server.port.http: 8080
