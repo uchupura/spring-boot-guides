@@ -28,7 +28,7 @@ class CustomServiceTest {
     }
 
     @Test
-    void 테스트1() {
+    void 서비스_MockBean() {
         when(mockService.send())
                 .thenReturn("receive is called");
 

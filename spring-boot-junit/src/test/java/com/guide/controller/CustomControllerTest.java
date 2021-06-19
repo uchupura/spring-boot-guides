@@ -52,10 +52,8 @@ class CustomControllerTest {
     }
 
     @Test
-    @DisplayName("HTTP Response의 code 필드를 통한 에러 테스트")
-    void API_에러_03() throws Exception {
-        /*MockService mockService = mock(MockService.class);
-        when(mockService.send()).thenReturn("receive is called");*/
+    @DisplayName("컨트롤러 내부 서비스의 Mock 처리")
+    void 컨트롤러_InjectMock() throws Exception {
         Mockito.when(mockService.send())
                 .thenReturn("receive is called");
 
