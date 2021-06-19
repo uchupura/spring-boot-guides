@@ -58,7 +58,7 @@ public class AopApplication implements CommandLineRunner {
         List<User> users = userService.getUsers();
         long end = System.currentTimeMillis();
         System.out.println("수행 시간 : "+ (end - start));*/
-        List<User> users = userService.findAll();
+        List<User> users = userService.getUsers();
         return users;
     }
 }

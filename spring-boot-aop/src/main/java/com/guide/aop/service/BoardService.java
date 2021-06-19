@@ -13,9 +13,9 @@ public class BoardService extends BoardPerformance {
 
     private final BoardRepository repository;
 
-    public List<Board> getBoards() {
+    /*public List<Board> getBoards() {
         return repository.findAll();
-    }
+    }*/
 
     @Override
     public List<Board> findAll() {

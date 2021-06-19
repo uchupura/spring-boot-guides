@@ -13,9 +13,9 @@ public class UserService extends UserPerformance {
 
     private final UserRepository repository;
 
-    public List<User> getUsers() {
+    /*public List<User> getUsers() {
         return repository.findAll();
-    }
+    }*/
 
     @Override
     public List<User> findAll() {
