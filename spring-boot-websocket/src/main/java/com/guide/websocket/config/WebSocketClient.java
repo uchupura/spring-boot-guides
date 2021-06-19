@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
@@ -19,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutionException;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Slf4j
 @Component
@@ -41,14 +44,15 @@ public class WebSocketClient {
         pool.clear();
     }
     public StompSession connect() throws ExecutionException, InterruptedException {
-        if(pool.size() < 5) return create();
 
         StompSession session = pool.poll();
+        if (isEmpty(session)) {
+            return create();
+        }
         if (!session.isConnected()) {
             destroyPool();
             return create();
         }
-
         return session;
     }
     public void close(StompSession session) {

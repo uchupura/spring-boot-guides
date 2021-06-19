@@ -19,8 +19,8 @@ public class ChatApiController {
     private final WebSocketClient client;
     private final ObjectMapper objectMapper;
 
-    @GetMapping
-    public void sendMessage(@RequestParam("message") String content) {
+    @GetMapping("/api")
+    public void sendMessage(@RequestParam("roomId") String roomId, @RequestParam("message") String content) {
         Message message = new Message();
         message.setContent(content);
         message.setSender("system");
@@ -30,7 +30,7 @@ public class ChatApiController {
             StompSession session = client.connect();
             String s = objectMapper.writeValueAsString(message);
             Message readValue = objectMapper.readValue(s, Message.class);
-            session.send("/app/chat.sendMessage", message);
+            session.send("/app/chat.sendMessage/"+roomId, message);
             client.close(session);
         } catch (Exception e) {
             System.out.println(e.getMessage());
