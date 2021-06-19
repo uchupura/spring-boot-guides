@@ -1,5 +1,6 @@
 package com.guide.aop;
 
+import com.guide.aop.aspect.Performance;
 import com.guide.aop.domain.Board;
 import com.guide.aop.domain.User;
 import com.guide.aop.repository.BoardRepository;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +20,7 @@ import java.util.List;
 
 @RestController
 @SpringBootApplication
+@EnableAspectJAutoProxy //오토 프록싱
 public class AopApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(AopApplication.class, args);
@@ -48,7 +52,7 @@ public class AopApplication implements CommandLineRunner {
         List<Board> boards = boardService.getBoards();
         long end = System.currentTimeMillis();
         System.out.println("수행 시간 : "+ (end - start));*/
-        List<Board> boards = boardService.getDataAll();
+        List<Board> boards = boardService.getBoards();
         return boards;
     }
 
@@ -58,7 +62,7 @@ public class AopApplication implements CommandLineRunner {
         List<User> users = userService.getUsers();
         long end = System.currentTimeMillis();
         System.out.println("수행 시간 : "+ (end - start));*/
-        List<User> users = userService.getDataAll();
+        List<User> users = userService.getUsers();
         return users;
     }
 }

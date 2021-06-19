@@ -1,6 +1,5 @@
 package com.guide.aop.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,22 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Entity
 @NoArgsConstructor
-public class Board {
-
+public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idx;
+    private long idx;
 
-    private String title;
+    private long userIdx;
+    private LocalDateTime updateDate;
 
-    private String content;
-
-    public Board(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public History(long userIdx, LocalDateTime updateDate) {
+        this.userIdx = userIdx;
+        this.updateDate = updateDate;
     }
 }
