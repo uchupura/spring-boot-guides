@@ -4,11 +4,13 @@
 ## 배치 설정
 ### 특정 배치만 실행 시키는 설정
 * application.yml에 아래 코드 추가
-* Program arguments로 job.name 값이 넘어오면 해당 값과 일치하는 Job만 실행
     * job.name이 없을 경우 NONE이 할당되며 이 경우 어떤 배치도 실행되지 않음
 ```shell script
 spring.batch.job.names: ${job.name:NONE}
 ```
+* Program arguments로 job.name 값이 넘어오면 해당 값과 일치하는 Job만 실행
+<img width="80%" src="https://user-images.githubusercontent.com/41175779/118909247-b41f9d80-b95d-11eb-872d-6b9c4ec08b43.png"/>
+
 * 운영 환경에서는 아래와 같이 실행
 ```shell script
 $ java -jar -Dspring.profiles.active=stage spring-boot-batch.jar --job.name=CustomDbChunkWriterJob version=4 status=JOIN
@@ -178,3 +180,50 @@ public JpaPagingItemReader<Person> reader() {
     * Source files : 전달하려는 파일 정보
     * Remove prefix : 전달 후 삭제하려는 폴더
     * Remote directory : 대상 서버에서 복사 대상이 되는 폴더
+    
+    
+    
+스프링 프레임워크의 3대 요소
+DI
+AOP
+서비스 추상황    
+    
+    
+배치 어플리케이션
+배치(Batch)는 일괄처리란 뜻을 갖고 있다.
+단발성으로 대용량의 데이터를 처리하는 어플리케이션을 배치 어플리케이션이라고 한다.
+
+배치 어플리케이션의 조건
+대용량 데이터
+대량의 데이터를 가져오거나, 전달하거나, 계산하는 등의 처리를 할 수 있어야 한다.
+자동화
+심각한 문제 해결을 제외하고는 개발자의 개입 없이 실행되어야 한다.
+견고성
+잘못된 데이터를 충돌/중단 없이 처리할 수 있어야 한다.
+신뢰성
+무엇이 잘못되었는지 추적할 수 있어야 한다. (로깅, 알림)
+성능
+지정한 시간 안에 처리를 완료하거나 동시에 실행되는 다른 어플리케이션을 방해하지 않도록 수행되어야 한다.
+
+Job
+하나의 배치 작업 단위이다.
+Job 안에는 여러 개의 Step이 존재할 수 있으며, Step 안에는 Tasklet 혹은 Reader & Processor & Writer 묶음이 존재한다.
+Tasklet
+Step 안에서 단일로 수행 될 커스텀한 기능들을 선언할 때 사용
+Step
+실제 배치 작업을 수행하는 역할을 한다.
+Step은 배치에서 실제 처리하고자 하는 기능과 설정을 모두 포함한다.
+
+메타 데이터
+데이터를 설명하는 데이
+BATCH_JOB_INSTANCE
+Job Parameter에 따라 생성되는 테이블
+Job Parameter? 스프링 배치가 실행될 때 외부에서 받을 수 있는 파라미터
+같은 Job이라도 Job Parameter가 다르면 BATCH_JOB_INSTANCE 테이블에 기록되며, Job Parameter가 같으면 기록되지 않는다.
+
+BATCH_JOB_EXECUTION
+BATCH_JOB_INSTANCE와 부모-자식 관계이다.
+자신의 부모 INSTANCE가 성공/실패했던 모든 내역을 가지고 있다.
+
+BATCH_JOB_EXECUTION_PARAM
+BATCH_JOB_EXECUTION 테이블에 데이터가 추가 될 당시에 입력 받은 Job Parameter를 저장한다.
