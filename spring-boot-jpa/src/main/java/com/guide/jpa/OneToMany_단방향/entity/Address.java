@@ -1,4 +1,4 @@
-package com.guide.jpa.OneToMany_일반;
+package com.guide.jpa.OneToMany_단방향.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
