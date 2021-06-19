@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService extends UserPerformance {
+public class UserService extends SuperPerformance<User> {
 
     private final UserRepository repository;
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BoardService extends BoardPerformance {
+public class BoardService extends SuperPerformance<Board> {
 
     private final BoardRepository repository;
 

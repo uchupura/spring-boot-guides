@@ -48,7 +48,7 @@ public class AopApplication implements CommandLineRunner {
         List<Board> boards = boardService.getBoards();
         long end = System.currentTimeMillis();
         System.out.println("수행 시간 : "+ (end - start));*/
-        List<Board> boards = boardService.findAll();
+        List<Board> boards = boardService.getDataAll();
         return boards;
     }
 
@@ -58,7 +58,7 @@ public class AopApplication implements CommandLineRunner {
         List<User> users = userService.getUsers();
         long end = System.currentTimeMillis();
         System.out.println("수행 시간 : "+ (end - start));*/
-        List<User> users = userService.getUsers();
+        List<User> users = userService.getDataAll();
         return users;
     }
 }
