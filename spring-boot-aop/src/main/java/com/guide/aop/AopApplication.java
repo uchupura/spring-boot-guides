@@ -44,21 +44,21 @@ public class AopApplication implements CommandLineRunner {
 
     @GetMapping("/boards")
     public List<Board> getBoards() {
-        //long start = System.currentTimeMillis();
+        /*long start = System.currentTimeMillis();
         List<Board> boards = boardService.getBoards();
-        //long end = System.currentTimeMillis();
-
-        //System.out.println("수행 시간 : "+ (end - start));
+        long end = System.currentTimeMillis();
+        System.out.println("수행 시간 : "+ (end - start));*/
+        List<Board> boards = boardService.findAll();
         return boards;
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        //long start = System.currentTimeMillis();
+        /*long start = System.currentTimeMillis();
         List<User> users = userService.getUsers();
-        //long end = System.currentTimeMillis();
-
-        //System.out.println("수행 시간 : "+ (end - start));
+        long end = System.currentTimeMillis();
+        System.out.println("수행 시간 : "+ (end - start));*/
+        List<User> users = userService.findAll();
         return users;
     }
 }
