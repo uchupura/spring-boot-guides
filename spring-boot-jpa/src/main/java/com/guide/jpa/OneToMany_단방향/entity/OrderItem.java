@@ -1,14 +1,14 @@
-package com.guide.jpa.OneToMany_일반;
+package com.guide.jpa.OneToMany_단방향.entity;
 
-import lombok.Getter;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Entity
+@Entity(name = "OrderItem2")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

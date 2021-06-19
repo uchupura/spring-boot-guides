@@ -1,5 +1,7 @@
-package com.guide.jpa.OneToMany_일반;
+package com.guide.jpa.OneToMany_양방향.dto;
 
+import com.guide.jpa.OneToMany_양방향.entity.OrderItem;
+import com.guide.jpa.OneToMany_양방향.entity.OrderStatus;
 import lombok.Getter;
 
 @Getter

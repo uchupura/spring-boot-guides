@@ -1,4 +1,4 @@
-package com.guide.jpa.OneToMany_일반;
+package com.guide.jpa.OneToMany_단방향.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -6,21 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Entity
-@Table(name = "orders")
+@Entity(name = "Order2")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // mappedBy에는 매핑하려는 필드 이름 입력
-    @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems = new ArrayList();
     private LocalDateTime orderDate;    // 주문 시간
 
     @Enumerated(EnumType.STRING)

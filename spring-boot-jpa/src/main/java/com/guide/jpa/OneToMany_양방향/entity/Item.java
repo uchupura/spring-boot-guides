@@ -1,7 +1,7 @@
-package com.guide.jpa.OneToMany_일반;
+package com.guide.jpa.OneToMany_양방향.entity;
 
-import lombok.Getter;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
