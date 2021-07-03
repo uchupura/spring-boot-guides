@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092     # kafka 클러스터에 초기 연결에 필요한 host:port 쌍의 쉼표로 구분된 목록
+      group-id: foo                         # consumer는 consumer group이 존재하기 때문에, 유일하게 식별 가능한 consumer group을 작성
+      auto-offset-reset: earliest           # 초기 offset이 없거나, 서버에 현재 더 이상 offset이 없는 경우 수행할 작업을 작성
+                                            # 1.latest(가장 최근 생산된 메세지로 offset rest)
+                                            # 2.earliest(가장 오래된 메세지로 offset rest)
+                                            # 3.none(offset 정보가 없으면 exception 발생)
+      # kafka에서 데이터를 받아올 때 key, value를 역직렬화
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      # kafka에서 데이터를 보낼 때 key, value를 직렬화
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
