@@ -15,8 +15,7 @@
 - 메세지의 상대적인 위치를 나타내는 것이 offset이다.
 - 여러 개의 Partition을 나누는 이유?
     - 여러 개의 Partition을 두면 쓰기가 병렬로 처리됨
-
-NOTE: 한 번 늘린 파티션은 절대로 줄일 수 없기 때문에 파티션을 늘릴 때 충분히 고려되어야 한다.
+> 한 번 늘린 파티션은 절대로 줄일 수 없기 때문에 파티션을 늘릴 때 충분히 고려되어야 한다.
 
 <img width="80%" src="https://user-images.githubusercontent.com/41175779/124350836-dc273f80-dc31-11eb-85fb-e994d16fd072.png"/>
 
@@ -50,7 +49,7 @@ NOTE: 한 번 늘린 파티션은 절대로 줄일 수 없기 때문에 파티�
     - broker.id=1..n으로 함으로써 동일한 노드에 여러 개의 broker 서버를 띄울 수도 있다.
 - Zookeeper
     - 분산 메세지 큐 정보를 관리해주는 기능을 수행
-    - Kafka를 띄우기 위해서는 Zookeeper가 반드시 실행되어야 한다.
+> Kafka를 띄우기 위해서는 Zookeeper가 반드시 실행되어야 한다.
     
 ### Replication
 - local에 broker를 3대 띄우고 (replica-factor=3)로 복제하는 경우
@@ -58,6 +57,43 @@ NOTE: 한 번 늘린 파티션은 절대로 줄일 수 없기 때문에 파티�
     - producer가 메세지를 쓰고, consumer가 메세지를 읽는 건 오로지 leader 역할이다.
     - follower들의 역할?
         - leader와 싱크를 맞추다가 leader가 죽었을 경우, 나머지 follower 중에 하나가 leader로 선출된다.        
+
+
+## 메시지 시스템의 보증 전략
+### at-most-once
+- 실패, 타임 아웃이 발생하면 메세지를 버리는 전략
+
+### exactly-once
+- 정확하게 한 번의 메세지 전송을 보장
+
+### at-least-once
+- 메세지는 최소 1회 전달되어야 한다는 전략
+- 메세지 중복 보장 X, 순서 보장 X
+
+
+## Kafka Exactly-once semantics
+### 멱등성
+- 멱등성은 연산을 여러 번 적용하더라도 결과가 달라지지 않은 성질
+- Producer의 메세지 전송이 멱등성을 가짐
+    - TCP의 패킷에 일련번호를 포함하여 패킷의 흐름을 제어가는 것과 동일한 방법으로 처리
+    - Kafka도 각각의 메세지에 일련번호를 두는 것으로 중복 메세지를 처리
+
+### 트랜잭션
+- 분산된 파티션에서 atomic write를 위한 트랜잭션 API 제공
+```
+producer.initTransactions();
+try {
+  producer.beginTransaction();
+  producer.send(record1);
+  producer.send(record2);
+  producer.commitTransaction();
+} catch(ProducerFencedException e) {
+  producer.close();
+} catch(KafkaException e) {
+  producer.abortTransaction();
+}
+```
+
 
 ## Docker로 Kafka 실행
 ### docker-compose
